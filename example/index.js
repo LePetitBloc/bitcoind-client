@@ -1,10 +1,14 @@
-const createJsonRpcClient = require('..');
+const { createClient } = require('../client');
+require('isomorphic-fetch');
 
-const dashClient = createJsonRpcClient({
+const call = createCall({
     rpchost: '127.0.0.1',
-    rpcuser: 'user',
-    rpcpassword: 'password',
-    rpcport: '9998',
+    rpcuser: 'test',
+    rpcpassword: 'test',
+    rpcport: '18443',
 });
 
-dashClient.request('getwalletinfo').then(res => console.log(res));
+call('getwalletinfo help')
+.then(res => res.json())
+.then(res => console.log(res))
+.catch(e => console.log(e));
